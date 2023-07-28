@@ -11,7 +11,7 @@ public class UI {		//scanea a matriz ChessPiece[][]
 			}
 			System.out.println();
 		}
-		System.out.print("  a b c d f g h");
+		System.out.print("  a b c d e f g h");
 	
 		}
 	
