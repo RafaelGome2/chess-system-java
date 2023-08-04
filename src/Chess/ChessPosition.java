@@ -1,7 +1,8 @@
 package Chess;
 
 import boardGame.Position;
-
+/*ChessPosition é uma classe só p/ receber a posição no formato xadrez pelo usuario
+e usa a funçao toPosition() p/ um endereço valido na matriz*/ 
 public class ChessPosition {
 	private char column;
 	private int row;
@@ -15,8 +16,7 @@ public class ChessPosition {
 	}
 	public char getColumn() {
 		return column;
-	}
-	
+	}	
 	public int getRow() {
 		return row;
 	}
