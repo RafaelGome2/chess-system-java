@@ -13,5 +13,11 @@ public class King extends ChessPiece{
 	public String toString() {
 		return "K";
 	}
+	@Override
+	public boolean[][] possibleMoves() {//nº de linhas e colunas de mat
+/*int[][] a = new int[x][y] --> matriz a de tamanho X e Y				*/		
+		boolean[][] mat= new boolean[board.getRows()][board.getColumns()];
+				return mat;
+	}
 
 }

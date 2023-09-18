@@ -1,7 +1,15 @@
 package App;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import javax.management.RuntimeErrorException;
+
+import Chess.ChessException;
 import Chess.ChessPiece;
+import Chess.ChessPosition;
 import Chess.Color;
+import boardGame.BoardException;
 
 public class UI { // scanea a matriz ChessPiece[][]
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
@@ -24,17 +32,35 @@ public class UI { // scanea a matriz ChessPiece[][]
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-
+	
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+	
+	
+	public static ChessPosition readChessPosition(Scanner sc) {
+		try {
+		String s = sc.nextLine();
+		char column = s.charAt(0);//a...b...c...
+		int row = Integer.parseInt(s.substring(1));//cria uma substring de s a partir do indice 1
+		return new ChessPosition(column, row);
+		}
+		catch(RuntimeException e) {
+			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8"); 
+			}
+		
+		
+	}//							 funçao pede uma matriz como argumento
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pieces.length; j++) {
-				printPiece(pieces[i][j]);
+				printPiece(pieces[i][j]);//a cada passada printPiece recebe um endereço da matriz
 			}
 			System.out.println();
 		}
 		System.out.print("  a b c d e f g h");
-
 	}
 
 	public static void printPiece(ChessPiece piece) {
@@ -50,5 +76,7 @@ public class UI { // scanea a matriz ChessPiece[][]
             }
         }
         System.out.print(" ");
+       
 	}
+	
 }

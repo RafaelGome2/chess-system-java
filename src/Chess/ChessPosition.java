@@ -6,10 +6,19 @@ e usa a funçao toPosition() p/ um endereço valido na matriz*/
 public class ChessPosition {
 	private char column;
 	private int row;
-//-----------------------
+//-----------------------; 
+	/*esta classe recebe como arg um char column e um int row e em seguida faz os testes: 
+	 'h' <column< 'a'  -->pois as colunas do tabuleiro vão de 'a' até 'h' colunas fora deste
+	 intervalo são invalidas
+	            OU
+	8 <row< 1 -->pois as linhas do tabuleiro vão de 1 a 8, linhas fora deste intervalo são 
+	invalidas			
+	  
+	  e se este teste der positivo lança uma exceção (ChessException)
+	 */
 	public ChessPosition(char column, int row) { //o tabuleiro vai da linha 1 a 8 e de 'a' ate 'h'
 		if(column <'a' || column >'h' || row<1 || row>8) {
-			throw new ChessException("Erro instantianting ChessPosition. valid values are from a1 to h8.");
+			throw new ChessException("Error instantianting ChessPosition. valid values are from a1 to h8.");
 					}
 		this.column = column;
 		this.row = row;
