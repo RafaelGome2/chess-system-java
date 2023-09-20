@@ -30,6 +30,7 @@ public class ChessMatch {
 	{	Position source = sourcePosition.toPosition();//transforma posição xadrez em posiçao matriz
 		Position target= targetPosition.toPosition();
 		validateSourcePosition(source);//faz teste e se der erro lança exceçao
+		validateTargetPosition(source,target);
 		Piece capturedPiece = makeMove(source, target);
 		return (ChessPiece) capturedPiece;
 	}//ChessPiece eh subclasse de Piece
@@ -40,13 +41,18 @@ public class ChessMatch {
 		board.placePiece(p, target);
 		return capturedPiece;
 	}
-	
+//sub funçoes privadas 	
 	private void validateSourcePosition(Position position) {
 		if(!board.thereIsAPiece(position)) {
 			throw new ChessException("There is no piece on source position");
 		}
 		if(!board.piece(position).isTheAnyPossibleMove()) {
 			throw new ChessException("There is no possible moves for the chosen piece");
+		}
+	}
+	private void validateTargetPosition(Position source,Position target) {
+		if(!board.piece(source).possibleMove(target)) {
+			throw new ChessException("The chosen piece can't move to target position");
 		}
 	}
 //caso não houver peça na position source lança BoardException	

@@ -12,9 +12,10 @@ public abstract class Piece {
 	//---------------------------------------------	
 		protected Board getBoard() {
 			return board;
-		}//metodo generico, abstrato. retorna uma matriz boolean
+		}
+		//metodo generico, abstrato. retorna uma matriz boolean
 		public abstract boolean[][] possibleMoves();
-		
+	//esta funçao faz um retorno booleano da posiçao argumentada, retorna FALSE ou TRUE	
 		public boolean possibleMove(Position position) {
 			return possibleMoves()[position.getRow()][position.getColumn()];
 			
