@@ -10,7 +10,7 @@ import boardGame.Position;
 public class ChessMatch {
 	private Board board;
 
-	//-------------------construtor padrão
+	//------------------ construtor padrão -------------
 	public ChessMatch() {
 		board = new Board(8, 8);//cria um tabuleiro 8x8
 		initialSetup();
@@ -25,6 +25,12 @@ public class ChessMatch {
 		
 		}
 	return mat;//retorna uma matriz 
+	}
+	
+	public boolean[][] possibleMoves(ChessPosition sourcePosition) {
+		Position position = sourcePosition.toPosition();//transforma em posição de matriz
+		validateSourcePosition(position);
+		return board.piece(position).possibleMoves(); 
 	}
 	public ChessPiece performChessMove(ChessPosition sourcePosition,ChessPosition targetPosition)
 	{	Position source = sourcePosition.toPosition();//transforma posição xadrez em posiçao matriz

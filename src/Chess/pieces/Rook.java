@@ -20,20 +20,22 @@ public class Rook extends ChessPiece {
 	}
 
 	@Override
-	public boolean[][] possibleMoves() {
-		boolean[][] mat = new boolean[board.getRows()][board.getColumns()];
-		Position p = new Position(0, 0);
+	public boolean[][] possibleMoves() {//aqui define o mat de tamanho[8][8]
+		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+		Position p = new Position(0,0);
 		//above
-		p.setValue(p.getRow()-1, p.getColumn());
+		p.setValue(position.getRow()-1,position.getColumn());
+/*o laço while para quando encontra uma peça e depois faz o teste IF(vrf se tem posiçao e se tem uma peça 
+ * oponente) se sim, esta posição recebe true	'*/		
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 		mat[p.getRow()][p.getColumn()]=true;
 		p.setRow(p.getRow()-1);}//dimunui 1 linha da linha atual
 		if(getBoard().positionExists(p) && isThereOpponentPiece(p)) {
 			mat[p.getRow()][p.getColumn()]=true;
-		}
+				}
 		
 		//below 
-		p.setValue(p.getRow()+1, p.getColumn());
+		p.setValue(position.getRow()+1, position.getColumn());
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()]= true;//marca de true este elemento
 			p.setRow(p.getRow()+1);
@@ -42,7 +44,7 @@ public class Rook extends ChessPiece {
 			mat[p.getRow()][p.getColumn()]=true;//marca de true este elemento
 		}
 		//left
-		p.setValue(p.getRow(), p.getColumn()-1);
+		p.setValue(position.getRow(), position.getColumn()-1);
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 		mat[p.getRow()][p.getColumn()]=true;
 		p.setColumn(p.getColumn()-1);}//diminui 1 linha da coluna atual
@@ -50,7 +52,7 @@ public class Rook extends ChessPiece {
 			mat[p.getRow()][p.getColumn()]=true;
 		}
 		//right 
-		p.setValue(p.getRow(), p.getColumn()+1);
+		p.setValue(position.getRow(), position.getColumn()+1);
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 		mat[p.getRow()][p.getColumn()]=true;
 		p.setColumn(p.getColumn()+1);}
