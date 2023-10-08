@@ -6,6 +6,7 @@ import java.util.Scanner;
 import javax.management.RuntimeErrorException;
 
 import Chess.ChessException;
+import Chess.ChessMatch;
 import Chess.ChessPiece;
 import Chess.ChessPosition;
 import Chess.Color;
@@ -49,9 +50,14 @@ public class UI { // scanea a matriz ChessPiece[][]
 		catch(RuntimeException e) {
 			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8"); 
 			}
-		
-		
-	}//							 funçao pede uma matriz como argumento
+			}
+	public static void printMatch(ChessMatch chessMatch) {
+		printBoard(chessMatch.getPieces());
+	System.out.println("\nTurn: "+chessMatch.getTurn()+
+		"\nWaiting player..." +chessMatch.getCurrentyPlayer());
+	}
+	
+	//							 funçao pede uma matriz como argumento
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");

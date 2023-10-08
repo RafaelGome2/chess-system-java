@@ -19,7 +19,7 @@ public class program {
 		while(true) {
 		try{//tratando as exceçoes
 		UI.clearScreen();
-		UI.printBoard(chessMatch.getPieces());
+		UI.printMatch(chessMatch);
 		System.out.println();
 		System.out.print("source: ");//se não tiver peça no source deve lançar exceção
 		ChessPosition source = UI.readChessPosition(sc);

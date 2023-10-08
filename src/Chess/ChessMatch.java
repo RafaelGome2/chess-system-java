@@ -9,13 +9,24 @@ import boardGame.Position;
 //				 partida de xadrez
 public class ChessMatch {
 	private Board board;
+	private int turn;
+	private Color currentyPlayer;
 
 	//------------------ construtor padrão -------------
 	public ChessMatch() {
 		board = new Board(8, 8);//cria um tabuleiro 8x8
+		turn =1;
+		currentyPlayer = Color.WHITE;
 		initialSetup();
 	}
 //---------------------------
+	public int getTurn() {
+		return turn;
+	}
+	public Color getCurrentyPlayer() {
+		return currentyPlayer;
+	}
+	
 // funçao getPiece(), ela retorna um result do tipo ChessPiece[][]	
 	public ChessPiece[][] getPieces(){
 		ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
@@ -26,6 +37,7 @@ public class ChessMatch {
 		}
 	return mat;//retorna uma matriz 
 	}
+	
 	
 	public boolean[][] possibleMoves(ChessPosition sourcePosition) {
 		Position position = sourcePosition.toPosition();//transforma em posição de matriz
@@ -38,8 +50,10 @@ public class ChessMatch {
 		validateSourcePosition(source);//faz teste e se der erro lança exceçao
 		validateTargetPosition(source,target);
 		Piece capturedPiece = makeMove(source, target);
+		nextTurn();
 		return (ChessPiece) capturedPiece;
-	}//ChessPiece eh subclasse de Piece
+		
+		}//ChessPiece eh subclasse de Piece
 //---------private------------------------------	
 	private Piece makeMove(Position source, Position target) {
 		Piece p = board.removePiece(source);
@@ -47,13 +61,18 @@ public class ChessMatch {
 		board.placePiece(p, target);
 		return capturedPiece;
 	}
-//sub funçoes privadas 	
+//				sub funçoes privadas 	
 	private void validateSourcePosition(Position position) {
+//não pode mover a peça do inimigo		
+		
 		if(!board.thereIsAPiece(position)) {
 			throw new ChessException("There is no piece on source position");
-		}
+		}		
 		if(!board.piece(position).isTheAnyPossibleMove()) {
-			throw new ChessException("There is no possible moves for the chosen piece");
+					throw new ChessException("There is no possible moves for the chosen piece");
+		}
+		if(currentyPlayer != ((ChessPiece)board.piece(position)).getColor()) {
+			throw new ChessException("Is Not possible move counter part");
 		}
 	}
 	private void validateTargetPosition(Position source,Position target) {
@@ -61,11 +80,16 @@ public class ChessMatch {
 			throw new ChessException("The chosen piece can't move to target position");
 		}
 	}
-//caso não houver peça na position source lança BoardException	
+//caso não houver peça na position source lança Exception	
 	private void validateSourcePosition2(Position position) {
 		if(board.piece(position)==null) {
 			throw new ChessException("There is no piece on source position");
 		}
+	}
+	
+	private void nextTurn() {
+		turn++;
+		currentyPlayer = (currentyPlayer == Color.WHITE) ? Color.BLACK: Color.WHITE;
 	}
 	
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
@@ -86,6 +110,7 @@ public class ChessMatch {
         placeNewPiece('e', 7, new Rook(board, Color.BLACK));
         placeNewPiece('e', 8, new Rook(board, Color.BLACK));
         placeNewPiece('d', 8, new King(board, Color.BLACK));
+        placeNewPiece('d', 5, new King(board, Color.BLACK));
 	}
 	
 }
