@@ -1,25 +1,27 @@
 package App;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import Chess.ChessException;
 import Chess.ChessMatch;
+import Chess.ChessPiece;
 import Chess.ChessPosition;
-import boardGame.BoardException;
 
 public class program {
 	
 	public static void main(String[] args) {
 		ChessMatch chessMatch = new ChessMatch();
 		Scanner sc = new Scanner(System.in);
-		
+		List<ChessPiece> captured = new ArrayList<>(); 
 		
 
 		while(true) {
 		try{//tratando as exceçoes
 		UI.clearScreen();
-		UI.printMatch(chessMatch);
+		UI.printMatch(chessMatch, captured);
 		System.out.println();
 		System.out.print("source: ");//se não tiver peça no source deve lançar exceção
 		ChessPosition source = UI.readChessPosition(sc);
@@ -30,7 +32,10 @@ public class program {
 		System.out.print("target: ");
 		ChessPosition target = UI.readChessPosition(sc);
 		//aqui faz o movimento no tabuleiro, agora só falta imprimir
-		chessMatch.performChessMove(source, target);
+		ChessPiece capturedPiece= chessMatch.performChessMove(source, target);
+		if(capturedPiece != null) {//caso capture uma peça add esta peça a lista captured
+			captured.add(capturedPiece);
+		}
 		}
 	
 	catch (ChessException e) {
