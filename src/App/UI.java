@@ -57,10 +57,10 @@ public class UI { // scanea a matriz ChessPiece[][]
 	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
 		printBoard(chessMatch.getPieces());
 		System.out.println();
-	System.out.println("\nTurn: "+chessMatch.getTurn()+
+		printCapturedPieces(captured);
+	System.out.println("Turn: "+chessMatch.getTurn()+
 		"\nWaiting player..." +chessMatch.getCurrentyPlayer());
-   printCapturedPieces(captured);
-   System.out.println( );}
+  }
 	
 	//							 funçao pede uma matriz como argumento
 	public static void printBoard(ChessPiece[][] pieces) {
@@ -101,7 +101,7 @@ public class UI { // scanea a matriz ChessPiece[][]
         }
         System.out.print(" ");
        
-	}
+	}// funçao só para imprimir as peças capturadas
 	private static void printCapturedPieces(List<ChessPiece> captured) {
 		List<ChessPiece> white = captured.stream().filter(x-> x.getColor()==Color.WHITE).collect(Collectors.toList());
 		List<ChessPiece> black = captured.stream().filter(x-> x.getColor()==Color.BLACK).collect(Collectors.toList());

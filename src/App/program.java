@@ -15,7 +15,7 @@ public class program {
 	public static void main(String[] args) {
 		ChessMatch chessMatch = new ChessMatch();
 		Scanner sc = new Scanner(System.in);
-		List<ChessPiece> captured = new ArrayList<>(); 
+		List<ChessPiece> captured= new ArrayList<>();
 		
 
 		while(true) {

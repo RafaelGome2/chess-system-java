@@ -1,5 +1,8 @@
 package Chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Chess.pieces.King;
 import Chess.pieces.Rook;
 import boardGame.Board;
@@ -11,7 +14,9 @@ public class ChessMatch {
 	private Board board;
 	private int turn;
 	private Color currentyPlayer;
-
+	private List<Piece> piecesOnTheBoard =new ArrayList<>();
+	private List<Piece> capturedPieces =new ArrayList<>();
+	
 	//------------------ construtor padrão -------------
 	public ChessMatch() {
 		board = new Board(8, 8);//cria um tabuleiro 8x8
@@ -54,11 +59,15 @@ public class ChessMatch {
 		return (ChessPiece) capturedPiece;
 		
 		}//ChessPiece eh subclasse de Piece
-//---------private------------------------------	
+//---------funçoes private------------------------------	
 	private Piece makeMove(Position source, Position target) {
 		Piece p = board.removePiece(source);
 		Piece capturedPiece = board.removePiece(target);
 		board.placePiece(p, target);
+		if(capturedPiece !=null) {
+			piecesOnTheBoard.remove(capturedPiece);//remove na list a peça
+			capturedPieces.add(capturedPiece);//add na list a peça
+		}
 		return capturedPiece;
 	}
 //				sub funçoes privadas 	
@@ -91,10 +100,11 @@ public class ChessMatch {
 		turn++;
 		currentyPlayer = (currentyPlayer == Color.WHITE) ? Color.BLACK: Color.WHITE;
 	}
-	
+	/*funçao para add uma piece na matriz board*/
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
-		board.placePiece(piece, new ChessPosition(column, row).toPosition());//retorna um new position como argumento
-	}//funçao para add uma piece na matriz board
+		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+	piecesOnTheBoard.add(piece);
+		}
 	
 		
 	private void initialSetup() {
