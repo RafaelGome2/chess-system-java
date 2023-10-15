@@ -6,14 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import javax.management.RuntimeErrorException;
-
-import Chess.ChessException;
 import Chess.ChessMatch;
 import Chess.ChessPiece;
 import Chess.ChessPosition;
 import Chess.Color;
-import boardGame.BoardException;
 
 public class UI { // scanea a matriz ChessPiece[][]
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
@@ -60,7 +56,11 @@ public class UI { // scanea a matriz ChessPiece[][]
 		printCapturedPieces(captured);
 	System.out.println("Turn: "+chessMatch.getTurn()+
 		"\nWaiting player..." +chessMatch.getCurrentyPlayer());
-  }
+		if(chessMatch.getCheck()) {
+			System.out.println("CHECK !");
+		}
+	}
+	
 	
 	//							 funçao pede uma matriz como argumento
 	public static void printBoard(ChessPiece[][] pieces) {
