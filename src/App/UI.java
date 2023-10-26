@@ -54,11 +54,19 @@ public class UI { // scanea a matriz ChessPiece[][]
 		printBoard(chessMatch.getPieces());
 		System.out.println();
 		printCapturedPieces(captured);
-	System.out.println("Turn: "+chessMatch.getTurn()+
-		"\nWaiting player..." +chessMatch.getCurrentyPlayer());
+	System.out.println("Turn: "+chessMatch.getTurn());
+		if(!chessMatch.getCheckMate()) {
+			System.out.println("Waiting player..." +chessMatch.getCurrentyPlayer());
 		if(chessMatch.getCheck()) {
 			System.out.println("CHECK !");
+			}
 		}
+		else {
+			System.out.println("CHECKMATE !");
+			System.out.println("Winner: " +chessMatch.getCurrentyPlayer());
+		}
+					
+		
 	}
 	
 	
