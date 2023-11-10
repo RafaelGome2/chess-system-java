@@ -29,7 +29,7 @@ public class Rook extends ChessPiece {
  * oponente) se sim, esta posição recebe true	'*/		
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 		mat[p.getRow()][p.getColumn()]=true;
-		p.setRow(p.getRow()-1);}//dimunui 1 linha da linha atual
+		p.setRow(p.getRow()-1);}//dimunui 1 linha da linha atual, para testar a linha acima
 		if(getBoard().positionExists(p) && isThereOpponentPiece(p)) {
 			mat[p.getRow()][p.getColumn()]=true;
 				}
@@ -38,7 +38,7 @@ public class Rook extends ChessPiece {
 		p.setValue(position.getRow()+1, position.getColumn());
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()]= true;//marca de true este elemento
-			p.setRow(p.getRow()+1);
+			p.setRow(p.getRow()+1);//incrementa 1 linha p/ testar a linha de baixo
 		}
 		if(getBoard().positionExists(p) && isThereOpponentPiece(p)) {
 			mat[p.getRow()][p.getColumn()]=true;//marca de true este elemento
@@ -47,7 +47,7 @@ public class Rook extends ChessPiece {
 		p.setValue(position.getRow(), position.getColumn()-1);
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 		mat[p.getRow()][p.getColumn()]=true;
-		p.setColumn(p.getColumn()-1);}//diminui 1 linha da coluna atual
+		p.setColumn(p.getColumn()-1);}//diminui 1 coluna, p/ testar a coluna  da esquerda
 		if(getBoard().positionExists(p) && isThereOpponentPiece(p)) {
 			mat[p.getRow()][p.getColumn()]=true;
 		}
